@@ -1,6 +1,6 @@
 # validatore.py
 
-def valida_password(password: str) -> bool:
+def valida_password(password: str, blacklist: list = []) -> bool:
     """
     Verifica che la password rispetti i requisiti aziendali.
     - Minimo 8 caratteri
@@ -15,5 +15,7 @@ def valida_password(password: str) -> bool:
         raise ValueError("La password deve contenere almeno un numero.")
     elif not any(c.isupper() for c in password):
         raise ValueError("La password deve contenere almeno una maiuscola.")
+    elif password.lower() in blacklist:
+        raise ValueError("La password è compromessa.")
 
     return True
